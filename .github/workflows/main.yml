@@ -1,0 +1,34 @@
+name: Build Plugin
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Download Spigot API
+      run: |
+        mkdir libs
+        curl -L -o libs/spigot-api.jar https://repo.spigotmc.org/repository/spigot-public/org/spigotmc/spigot-api/1.19.4-R0.1-SNAPSHOT/spigot-api-1.19.4-R0.1-SNAPSHOT.jar
+
+    - name: Compile plugin
+      run: |
+        mkdir -p build
+        javac -cp libs/spigot-api.jar -d build $(find src -name "*.java")
+        cp resources/plugin.yml build/
+        cd build && jar cf DualProfilePlugin.jar *
+    
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: DualProfilePlugin
+        path: build/DualProfilePlugin.jar

@@ -18,7 +18,7 @@ jobs:
     - name: Download Spigot API
       run: |
         mkdir libs
-        curl -L -o libs/spigot-api.jar https://repo.spigotmc.org/repository/spigot-public/org/spigotmc/spigot-api/1.19.4-R0.1-SNAPSHOT/spigot-api-1.19.4-R0.1-SNAPSHOT.jar
+        curl -L -o libs/spigot-api.jar https://repo.spigotmc.org/repository/spigot-public/org/spigotmc/spigot-api/1.20.4-R0.1-SNAPSHOT/spigot-api-1.20.4-R0.1-SNAPSHOT.jar
 
     - name: Compile plugin
       run: |
@@ -26,8 +26,8 @@ jobs:
         javac -cp libs/spigot-api.jar -d build $(find src -name "*.java")
         cp resources/plugin.yml build/
         cd build && jar cf DualProfilePlugin.jar *
-    
-    - name: Upload artifact
+
+    - name: Upload JAR as artifact
       uses: actions/upload-artifact@v3
       with:
         name: DualProfilePlugin

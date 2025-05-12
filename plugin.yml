@@ -1,0 +1,13 @@
+name: DualProfilePlugin
+main: me.yourname.dualprofile.DualProfilePlugin
+version: 1.0
+api-version: 1.13
+commands:
+  switchprofile:
+    description: Switch between admin and survival profiles
+    usage: /<command> <admin|survival>
+    permission: dualprofile.switch
+permissions:
+  dualprofile.switch:
+    description: Allows switching between profiles
+    default: op

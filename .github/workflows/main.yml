@@ -28,7 +28,7 @@ jobs:
         cd build && jar cf DualProfilePlugin.jar *
 
     - name: Upload JAR as artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v2
       with:
         name: DualProfilePlugin
         path: build/DualProfilePlugin.jar
